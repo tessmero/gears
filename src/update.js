@@ -5,8 +5,14 @@ function update(dt) {
 
     fitToContainer()  
     
+    // update base gear physics
     if( global.debugPoitns ) global.debugPoints = [] 
     global.allGears.forEach( gear => gear.update(dt) )
+        
+    // align/repel gears based on planned chain
+    global.allGears.forEach( g => g.repulsionDisabled = g.links.some(l => 
+        (!l.repel) && (!l.isInterlocked)
+    ))
     global.allLinks.forEach( lk => lk.update(dt) )
             
     // cycle out one gear if necessary

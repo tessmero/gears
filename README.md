@@ -1,9 +1,13 @@
 
 Randomized spinning gears automatically align to form a chain.
 
-Click to spawn a new gear, reload to randomize
+Click to spawn a new gear and shuffle the chain
 
-Each gear is treated as a single particles with NO angular velocity. Instead one oscillatting global variable creates the effect of momentum and each gear just has a fixed angular offset. Neighboring gears' angular offsets are occasionally nudged for convincing interlocking effect.
+Special simplified physics engine:
+- Each gear is treated as a single particle with a fixed orientation
+- One global oscillating number creates the effect of angular momentum
+- Precise interlocking effect by occasionally nudging the gears' orientations
+- Nudges always applied in opposite equal pairs for realistic transfer along chain
 
 
 

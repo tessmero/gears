@@ -16,6 +16,7 @@ class Gear {
         
         this.tips = null //
         this.ao = 0
+        this.links = [] // Link instances
     }
    
     update(dt){

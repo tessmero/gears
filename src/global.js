@@ -34,7 +34,7 @@ const global = {
     
     // periodically cycle out gears
     autoMoveCountdown: 0,
-    autoMoveDelay: 30000,
+    autoMoveDelay: 17548,
     
     //debug
     debugPoints: false,

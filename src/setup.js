@@ -39,7 +39,21 @@ function resetGame(){
 function rebuildGearLinks(){
     
     var gs = global.allGears
-    var n = global.allGears.length
+    var odd = []
+    var even = []
+    gs.forEach( g => (g.cw?even:odd).push(g) )
+    shuffle(even)
+    shuffle(odd)
+    gs = []
+    while( (odd.length>0) && (even.length>0) ){
+        var t = odd.pop()
+        if( t ) gs.push(t)
+        t = even.pop()
+        if( t ) gs.push(t)
+    }
+    global.allGears = gs
+    var n = gs.length
+    gs.forEach(gear => gear.links = [])
     
     // build links between gears
     // neighboring gears align, otherwise repel
@@ -48,6 +62,17 @@ function rebuildGearLinks(){
         for( var j = i+1 ; j < n ; j++ )
             gl.push( new Link( gs[i], gs[j], j != (i+1) ) ) 
     global.allLinks = gl
+}
+
+
+// check if line segment intersects any existing neighbor-links
+function isSegmentClear(a,b){
+    for( var i = 0 ; i < global.allLinks.length ; i++ ){
+        var l = global.allLinks[i]
+        if( l.repel ) continue
+        if( segmentsIntersection( l.a.pos, l.b.pos, a, b) ) return false
+    }
+    return true
 }
 
 // Main game loop
