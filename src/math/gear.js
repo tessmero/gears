@@ -20,10 +20,11 @@ class Gear {
    
     update(dt){
         //push on-screen
-        if( this.pos.x < 0 ) this.pos.x = 0
-        if( this.pos.x > 1 ) this.pos.x = 1
-        if( this.pos.y < 0 ) this.pos.y = 0
-        if( this.pos.y > 1 ) this.pos.y = 1
+        var sc = global.screenCorners
+        if( this.pos.x < sc[0].x ) this.pos.x = sc[0].x
+        if( this.pos.x > sc[2].x ) this.pos.x = sc[2].x
+        if( this.pos.y < sc[0].y ) this.pos.y = sc[0].y
+        if( this.pos.y > sc[2].y ) this.pos.y = sc[2].y
         
         this.vel = this.vel.mul( 1.0 - global.friction )        
         this.pos = this.pos.add(this.vel.mul(dt))

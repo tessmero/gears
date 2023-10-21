@@ -1,5 +1,10 @@
 
-Interlocking gears animation
+Randomized spinning gears automatically align to form a chain.
+
+Click to spawn a new gear, reload to randomize
+
+Each gear is treated as a single particles with NO angular velocity. Instead one oscillatting global variable creates the effect of momentum and each gear just has a fixed angular offset. Neighboring gears' angular offsets are occasionally nudged for convincing interlocking effect.
+
 
 
 ## Demo

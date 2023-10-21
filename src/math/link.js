@@ -26,7 +26,7 @@ class Link {
         var m2 = d.m2()
         var dm2 = m2-this.targetM2
         if( this.repel && (dm2>0) ) return
-        if( this.repel ) dm2 *= 10
+        if( this.repel ) dm2 *= 2
         var accel = vp( d.getAngle(), dm2*global.allignForce*dt )
         a.vel = a.vel.sub(accel)
         b.vel = b.vel.add(accel)

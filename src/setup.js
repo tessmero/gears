@@ -3,19 +3,7 @@
 // Initialize the game
 function init() {
     var cvs = document.getElementById("gameCanvas");
-    cvs.addEventListener("mousemove", mouseMove);
     cvs.addEventListener("mousedown", mouseClick);
-    
-    // https://stackoverflow.com/a/63469884
-    var previousTouch;
-    cvs.addEventListener("touchmove", (e) => {
-        const touch = e.touches[0];
-        mouseMove({
-            clientX: touch.pageX,
-            clientY: touch.pageY
-        })
-        e.preventDefault()
-    });
     
     
     global.canvas = cvs

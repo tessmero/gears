@@ -55,8 +55,8 @@ function fitToContainer(){
     global.ctx.setTransform(global.canvasScale, 0, 0, 
         global.canvasScale, global.canvasOffsetX, global.canvasOffsetY);
         
-        var xr = -global.canvasOffsetX / global.canvasScale
-        var yr = -global.canvasOffsetY / global.canvasScale
+        var xr = -global.canvasOffsetX / dimension
+        var yr = -global.canvasOffsetY / dimension
         global.screenCorners = [v(xr,yr),v(1-xr,yr),v(1-xr,1-yr),v(xr,1-yr)]
         global.screenCenter = v(.5,.5)
     }
