@@ -5,8 +5,9 @@ function update(dt) {
 
     fitToContainer()  
     
-    
+    global.debugPoints = []
     global.allGears.forEach( gear => gear.update(dt) )
+    global.allLinks.forEach( lk => lk.update(dt) )
             
     if( true ){
         if( false && (global.autoMoveCountdown > 0) ){

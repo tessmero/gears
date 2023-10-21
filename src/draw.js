@@ -10,6 +10,7 @@ function draw(fps, t) {
 
     // draw gears
     g.strokeStyle = global.lineColor
+    g.fillStyle = global.lineColor
     g.lineWidth = global.lineWidth
     global.allGears.forEach( b => b.draw(g) )
     
@@ -37,9 +38,13 @@ function draw(fps, t) {
 
     //debug
     if( global.debugPoints ){
-        g.fillStyle = 'red'
-        g.beginPath()
-        global.allPoints.forEach(p => p.draw(g))
-        g.fill()
+        global.debugPoints.forEach(c => {
+            g.fillStyle = c[1]
+            c = c[0]
+            g.beginPath()
+            g.moveTo(c.x,c.y)
+            g.arc(c.x,c.y,.01,0,twopi)
+            g.fill()
+        })
     }
 }

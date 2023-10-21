@@ -32,14 +32,18 @@ function resetGame(){
     resetRand()
     global.autoResetCountdown = global.autoResetDelay
     
-    var gs = [
-        new Gear( v(.4,.5), .2,.25,10,true),
-        new Gear( v(.6,.5), .2,.25,10,false) 
-    ]
-    gs[0].neighbors.push(gs[1])
-    gs[1].neighbors.push(gs[0])
+    var gs = []
+    
+    for( var i = 0 ; i < 2 ; i++ ){
+        gs.push(new Gear(
+            v(rand(),rand()),
+            randInt(2,15),
+            i%2
+        ))
+    }
     
     global.allGears = gs
+    global.allLinks = [new Link(gs[0],gs[1])]
     
 }
 

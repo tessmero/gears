@@ -20,9 +20,14 @@ const global = {
     // state
     t: 0, // total time elapsed
     allGears: [], // Gear instances
+    allLinks: [], // Link instances
     animPeriod: 100000,
     animState: 0, // [0-1] oscilates over animPeriod
-    animScale: 100, // interger temporal scale, number of teeth
+    animScale: 50, // interger temporal scale, number of teeth
+    
+    //
+    toothTaper: .06, // how much to taper each tooth (radians)
+    toothWidth: .015, 
     
     //
     friction: 1e-2, // fraction of speed lost per ms
@@ -33,6 +38,6 @@ const global = {
     autoMoveDelay: 1000,
     
     //debug
-    debugPoints: false,
+    debugPoints: [],
     debugMouse: false,
 }
