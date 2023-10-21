@@ -1,6 +1,7 @@
 
 class Gear {
-    constructor(pos,n,cw){
+    constructor(pos,cw){
+        var n = randInt(3,15)
         this.pos = pos
         this.vel = v(0,0)
         
@@ -18,11 +19,17 @@ class Gear {
     }
    
     update(dt){
+        //push on-screen
+        if( this.pos.x < 0 ) this.pos.x = 0
+        if( this.pos.x > 1 ) this.pos.x = 1
+        if( this.pos.y < 0 ) this.pos.y = 0
+        if( this.pos.y > 1 ) this.pos.y = 1
+        
         this.vel = this.vel.mul( 1.0 - global.friction )        
         this.pos = this.pos.add(this.vel.mul(dt))
     }
    
-    draw(g){
+    draw(g,fill){
         var c = this.pos
         
         // angle offset due to spinning animation
@@ -37,7 +44,7 @@ class Gear {
         
         // prepare to save tooth locations for purposes 
         // of collisions with neighboring gears
-        this.tips = []
+        if( fill ) this.tips = []
         
         // start drawing
         g.beginPath()
@@ -49,6 +56,11 @@ class Gear {
             this.tips.push([ c.add(vp(a[2],this.r2)), c.add(vp(a[3],this.r2)) ])
         }
         g.closePath()
-        g.fill()
+        if( fill ) {
+            g.fill()
+        } else {
+            g.stroke()
+        }
+     
     }
 }

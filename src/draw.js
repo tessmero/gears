@@ -9,9 +9,10 @@ function draw(fps, t) {
     g.fillRect( -10,-10,30,30 )
 
     // draw gears
-    g.strokeStyle = global.lineColor
-    g.fillStyle = global.lineColor
-    g.lineWidth = global.lineWidth
+    g.strokeStyle = 'white'
+    g.fillStyle = 'gray'
+    g.lineWidth = .005
+    global.allGears.forEach( b => b.draw(g,true) )
     global.allGears.forEach( b => b.draw(g) )
     
     

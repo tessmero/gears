@@ -4,6 +4,7 @@
 function init() {
     var cvs = document.getElementById("gameCanvas");
     cvs.addEventListener("mousemove", mouseMove);
+    cvs.addEventListener("mousedown", mouseClick);
     
     // https://stackoverflow.com/a/63469884
     var previousTouch;
@@ -32,19 +33,33 @@ function resetGame(){
     resetRand()
     global.autoResetCountdown = global.autoResetDelay
     
+    // build gears
     var gs = []
-    
-    for( var i = 0 ; i < 2 ; i++ ){
+    var n = 7
+    for( var i = 0 ; i < n ; i++ ){
         gs.push(new Gear(
-            v(rand(),rand()),
-            randInt(2,15),
+            v(randRange(.3,.7),randRange(.3,.7)),
             i%2
         ))
     }
-    
     global.allGears = gs
-    global.allLinks = [new Link(gs[0],gs[1])]
     
+    rebuildGearLinks()
+    
+}
+
+function rebuildGearLinks(){
+    
+    var gs = global.allGears
+    var n = global.allGears.length
+    
+    // build links between gears
+    // neighboring gears align, otherwise repel
+    var gl = []
+    for( var i = 0 ; i < n ; i++ )
+        for( var j = i+1 ; j < n ; j++ )
+            gl.push( new Link( gs[i], gs[j], j != (i+1) ) ) 
+    global.allLinks = gl
 }
 
 // Main game loop

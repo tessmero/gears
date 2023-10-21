@@ -14,8 +14,6 @@ const global = {
 
     // 
     backgroundColor: 'black',
-    lineColor: 'white',
-    lineWidth: .001,
       
     // state
     t: 0, // total time elapsed
@@ -31,13 +29,14 @@ const global = {
     
     //
     friction: 1e-2, // fraction of speed lost per ms
-    allignForce: 1e-6, // scale of accel to position gears
+    allignForce: 2e-6, // scale of accel to position gears
+    spinAllignForce: 3e-4, // scale of nudge to align neighboring teeth
     
-    // move automatically if no user input
+    // periodically cycle out gears
     autoMoveCountdown: 0,
-    autoMoveDelay: 1000,
+    autoMoveDelay: 30000,
     
     //debug
-    debugPoints: [],
+    debugPoints: false,
     debugMouse: false,
 }

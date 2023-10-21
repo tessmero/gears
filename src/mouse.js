@@ -19,16 +19,10 @@ function updateMousePos(event){
 function mouseMove(e){
     updateMousePos(e)
     
-    // apply user-set motion
-    global.autoMoveCountdown = global.autoMoveDelay
-    global.innerFocus = global.mousePos.x
-    global.outerFocus = global.mousePos.y
-    
 }
 
 function mouseClick(e){
     updateMousePos(e)
-    
+    spawnGear(global.mousePos)
     //global.debugPoint = global.mousePos
-    resetGame()
 }

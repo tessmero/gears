@@ -5,25 +5,37 @@ function update(dt) {
 
     fitToContainer()  
     
-    global.debugPoints = []
+    if( global.debugPoitns ) global.debugPoints = [] 
     global.allGears.forEach( gear => gear.update(dt) )
     global.allLinks.forEach( lk => lk.update(dt) )
             
-    if( true ){
-        if( false && (global.autoMoveCountdown > 0) ){
-            global.autoMoveCountdown -= dt
-            
-        } else {
-            
-            // main animation
-            let p = global.animPeriod
-            let pindex = Math.floor(global.t / p)
-            let r = (global.t % p) / p
-            global.animState = Math.cos(r*twopi-pi)/2+.5
-        }
+    // cycle out one gear if necessary
+    if( global.autoMoveCountdown > 0 ){
+        global.autoMoveCountdown -= dt
+        
+    } else {
+        spawnGear()
     }
+        
+    // main animation
+    let p = global.animPeriod
+    let pindex = Math.floor(global.t / p)
+    let r = (global.t % p) / p
+    global.animState = Math.cos(r*twopi-pi)/2+.5
 }
 
+
+function spawnGear( pos=null ){
+    if( pos == null ) pos = v(randRange(.3,.7),randRange(.3,.7))
+    
+    global.autoMoveCountdown = global.autoMoveDelay
+    global.allGears.shift()
+    global.allGears.push(new Gear(
+        pos,
+        !global.allGears[global.allGears.length-1].cw
+    ))
+    rebuildGearLinks()
+}
 
 
 var lastCanvasOffsetWidth = -1;
@@ -36,7 +48,7 @@ function fitToContainer(){
       cvs.width  = cvs.offsetWidth;
       cvs.height = cvs.offsetHeight;
         
-        var dimension = avg(cvs.width, cvs.height);
+        var dimension = Math.min(cvs.width, cvs.height);
         global.canvasScale = dimension;
         global.canvasOffsetX = (cvs.width - dimension) / 2;
         global.canvasOffsetY = (cvs.height - dimension) / 2;
